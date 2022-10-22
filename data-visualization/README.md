@@ -33,3 +33,20 @@ https://dash-bootstrap-components.opensource.faculty.ai/docs/components/dropdown
 https://realpython.com/python-dash/ 
 
 
+- Basic callbacks 
+
+https://dash.plotly.com/basic-callbacks 
+
+https://medium.datadriveninvestor.com/visualizing-some-key-financial-metrics-for-your-stocks-f987ea37035e
+
+
+- more dash layout to build 
+
+https://realpython.com/python-dash/
+
+- Storage 
+
+https://www.youtube.com/watch?v=pEbL_TT9cHg&ab_channel=JieJenn 
+
+https://www.youtube.com/watch?v=bHudgNDyltI&ab_channel=Cloud%26AIAnalytics
+
