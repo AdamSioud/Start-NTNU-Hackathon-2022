@@ -147,10 +147,9 @@ sidebar = html.Div([
 
     html.Div(
         [
-            [dcc.Link(
+            dcc.Link(
                 f"{page['name']}", href=page["relative_path"]
-            ),
-            html.Br()]
+            )
             for page in dash.page_registry.values()
         ],  
     ),
