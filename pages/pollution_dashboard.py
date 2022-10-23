@@ -6,26 +6,10 @@ from dash import html, dcc, callback, Input, Output
 import dash
 
 
-dash.register_page(__name__)
 
-#app = dash.Dash(__name__)
-
-#### READ THE DATA
 
 
 df = pd.read_csv("data-processing/data/ID123.csv")
-
-
-## Figures
-
-## Pressure vs depth fig
-
-
-# fig_pressure_depth = px.scatter(df, x="depth", y="pressure", title="pressure vs. depth")
-# fig_pressure_depth.update_layout(
-#     title="pressure vs. depth", xaxis_title="kPa", yaxis_title="degrees C"
-# )
-# fig_pressure_depth.show()
 
 
 ## Pollution levels on all buoy ids
@@ -52,48 +36,6 @@ fig_all_pressure = px.scatter(
     range_y=[0, 40],
     range_x=[0, 6],
 )
-
-# fig_all_pressure.show()
-
-
-# Choose which robot you want to plot data for
-
-
-# robot_id = 2
-# field = "Frigg"
-# df2 = df.loc[(df["id"] == robot_id) & (df["field"] == field)]
-
-
-## Depth
-
-
-# fig_depth = px.line(df2, x="time", y="depth", title="depth")
-# fig_depth.update_layout(xaxis_title="time [h]", yaxis_title="depth [m]")
-# fig_depth.show()
-
-
-## Pressure
-
-
-# fig_pressure = px.line(df2, x="time", y="pressure", title="pressure")
-# fig_pressure.update_layout(xaxis_title="time [h]", yaxis_title="pressure [kPa]")
-# fig_pressure.show()
-
-
-## Temprature
-
-
-# fig_temprature = px.line(df2, x="time", y="temperature", title="temperature")
-# fig_temprature.update_layout(xaxis_title="time [h]", yaxis_title="temp [°C]")
-# fig_temprature.show()
-
-
-## Pollution
-
-
-# fig_pollution = px.line(df2, x="time", y="pollution", title="pollution")
-# fig_pollution.update_layout(xaxis_title="time [h]", yaxis_title="pollution [ppm]")
-# fig_pollution.show()
 
 
 from dash import dcc  # dash version 2.0.0
@@ -217,7 +159,6 @@ firstpage = [
     ),
 ]
 
-#app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 layout = html.Div(id="page-content", children=firstpage, className="p-3")
 

@@ -4,14 +4,19 @@ import dash
 from dash import dcc  # dash version 2.0.0
 from dash import html  # dash version 2.0.0
 import dash_bootstrap_components as dbc  # version 1.0.2
+from dash import html, dcc, callback, Input, Output
+
 
 # https://dash-bootstrap-components.opensource.faculty.ai/docs/components/
 from dash.dependencies import Output, Input
 
-app = dash.Dash(__name__)
+
+dash.register_page(__name__)
+
+
 #### READ THE DATA
 
-df = pd.read_csv("../../data-processing/data/ekkolodd.csv")
+df = pd.read_csv("data-processing/data/ekkolodd.csv")
 
 all_data_graph = px.scatter(df, x="sample start time", y="distance", title="distance")
 # Creating labels and values for dash components
@@ -49,7 +54,7 @@ firstpage = [
                         clearable=False,
                     ),
                     # Display text information related to the selected buoy
-                    html.Div(id="generalinfo", className="text-center p-2"),
+                    html.Div(id="ekkoloddinfo", className="text-center p-2"),
                     html.Div(id="distancemean", className="text-center p-2"),
                     html.Div(id="confidencemean", className="text-center p-2"),
                 ],
@@ -91,17 +96,16 @@ firstpage = [
     ),
 ]
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-app.layout = html.Div(id="page-content", children=firstpage, className="p-3")
+layout = html.Div(id="page-content", children=firstpage, className="p-3")
 
 
-@app.callback(
+@callback(
     [
         # Output("allpressurechart", "figure"),
         Output("distancechart", "figure"),
         Output("confidencechart", "figure"),
-        Output("generalinfo", "children"),
+        Output("ekkoloddinfo", "children"),
         Output("distancemean", "children"),
         Output("confidencemean", "children"),
     ],
@@ -116,7 +120,7 @@ def update_figure(start_time):
     fig_confidence = px.line(df2, y="confidence", title="confidence")
 
     # text info about current buoy
-    generalinfo = f"Shows info for the ekkolodd sensor at start time {start_time}"
+    ekkoloddinfo = f"Shows info for the ekkolodd sensor at start time {start_time}"
     distancemean = f"The mean of distance data values is: {df2['distance'].mean()}"
     confidencemean = (
         f"The mean of confidence data values is: {df2['confidence'].mean()}"
@@ -125,11 +129,8 @@ def update_figure(start_time):
     return (
         fig_distance,
         fig_confidence,
-        generalinfo,
+        ekkoloddinfo,
         distancemean,
         confidencemean,
     )
 
-
-if __name__ == "__main__":
-    app.run_server(debug=True, port=8051)
