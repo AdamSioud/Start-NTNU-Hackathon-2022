@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 
-def get_ID123(
+def get_pollution_data(
     field: str,
     id: int,
     size=1000,
@@ -17,9 +17,8 @@ def get_ID123(
     oil_max=10,
     oil_surface_chance=0.2,
 ):
+    """Generate pollution data. Based of ID123 in ISD4000"""
     df = pd.DataFrame()
-
-    # draws distributions
 
     time = np.arange(0, size)
     df["time"] = time
@@ -30,6 +29,7 @@ def get_ID123(
     id_col = np.ones(size) * id
     df["id"] = id_col
 
+    # Generate depth values based on sin and noise
     sinus = np.sin(np.arange(0, size / 5, 0.2)) * depth_sin_var + depth_mean
     depth = sinus + np.random.normal(0, depth_noise_var, size)
     depth += np.random.choice([0, 1.5, -4], size=size, p=[0.8, 0.15, 0.05])
@@ -40,9 +40,11 @@ def get_ID123(
     depth = np.clip(depth, 0, 50)
     df["depth"] = depth
 
+    # get pressure based on depth
     pressure = depth * 9.81 + np.random.normal(0, 3, size)
     df["pressure"] = pressure
 
+    # get temperature based on depth
     temperature = -np.log(depth + 0.1) * temp_log_mult + temp_max
     temperature = np.clip(temperature, 2.5, temp_max)
     temperature += np.random.normal(0, 0.2, size)
@@ -57,16 +59,18 @@ def get_ID123(
             oil_spill[i * 168 : i * 168 + 168] = np.clip(
                 oil_spill[i * 168 : i * 168 + 168], 0, 1
             )
+    oil_spill += np.random.normal(0, 0.05, size)
     df["oil_spill"] = oil_spill
 
     return df
 
 
-oilfields = np.array(["Frigg", "Magnus", "Troll", "Gullfaks", "Viking", "Snorre"])
+OIL_FIELDS = np.array(["Frigg", "Magnus", "Troll", "Gullfaks", "Viking", "Snorre"])
 SIZE = 1000
 NUM_BUOYS = [5, 3, 7, 5, 4, 4]
-id100 = pd.DataFrame()
-for idx, field in enumerate(oilfields):
+pollution_df = pd.DataFrame()
+for idx, field in enumerate(OIL_FIELDS):
+    # Set distributions based on oil_fields
     depth_sin_var = 2 + np.random.normal(0, 0.3, 1)[0]
     depth_mean = 25 + np.random.normal(0, 2, 1)[0]
     depth_noise_var = 2.5 + np.random.normal(0, 0.2, 1)[0]
@@ -79,10 +83,10 @@ for idx, field in enumerate(oilfields):
     oil_surface_chance = 0.2 + np.random.normal(0, 0.02, 1)[0]
 
     for buoy_id in range(NUM_BUOYS[idx]):
-        id100 = pd.concat(
+        pollution_df = pd.concat(
             (
-                id100,
-                get_ID123(
+                pollution_df,
+                get_pollution_data(
                     field=field,
                     id=buoy_id,
                     size=SIZE,
@@ -99,7 +103,7 @@ for idx, field in enumerate(oilfields):
                 ),
             )
         )
-id100 = id100.reset_index()
-id100 = id100.drop("index", axis=1)
+pollution_df = pollution_df.reset_index()
+pollution_df = pollution_df.drop("index", axis=1)
 
-id100.to_csv("data-processing/data/ID123.csv", index=False)
+pollution_df.to_csv("data-processing/data/ID123.csv", index=False)

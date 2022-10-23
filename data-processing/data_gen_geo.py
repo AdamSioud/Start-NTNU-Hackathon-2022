@@ -1,7 +1,5 @@
 import pandas as pd
 import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
 
 
 def get_geo_data(
@@ -11,6 +9,7 @@ def get_geo_data(
     lat_center: int = 59,
     lon_center: int = 2,
 ):
+    """Generate geo_data for one sensor"""
     df = pd.DataFrame()
 
     time = np.arange(0, size)
@@ -34,14 +33,6 @@ def get_geo_data(
 OIL_FIELDS = np.array(["Frigg", "Magnus", "Troll", "Gullfaks", "Viking", "Snorre"])
 SIZE = 200
 NUM_BUOYS = [5, 3, 7, 5, 4, 4]
-COLORS = [
-    px.colors.sequential.Teal,
-    px.colors.sequential.Purples,
-    px.colors.sequential.Greens,
-    px.colors.sequential.Reds,
-    px.colors.sequential.Blues,
-    px.colors.sequential.Electric,
-]
 
 geo_data = pd.DataFrame()
 for idx, field in enumerate(OIL_FIELDS):
@@ -61,33 +52,4 @@ for idx, field in enumerate(OIL_FIELDS):
             )
         )
 geo_data = geo_data.reset_index(drop=True)
-
-fig = go.Figure(go.Scattermapbox())
-
-field_plots = []
-for idx, field in enumerate(OIL_FIELDS):
-    field_df = geo_data[geo_data["field"] == field]
-    for i in range(NUM_BUOYS[idx]):
-        id_field_df = field_df[field_df["id"] == i]
-        fig.add_trace(
-            go.Scattermapbox(
-                name=f"{id_field_df['field'].iloc[0]} {id_field_df['id'].iloc[0]}",
-                mode="markers+lines",
-                lat=id_field_df["lat"],
-                lon=id_field_df["lon"],
-                marker={"size": 5},
-                line=dict(color=COLORS[idx][i]),
-            )
-        )
-fig.update_layout(
-    margin={"r": 0, "t": 0, "l": 0, "b": 0},
-    mapbox={
-        "style": "stamen-terrain",
-        "zoom": 6,
-        "center": {"lon": 2, "lat": 59},
-    },
-)
-# fig.show()
-
 geo_data.to_csv("data-processing/data/geo_data.csv", index=False)
-fig.show()
