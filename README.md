@@ -2,12 +2,16 @@
 
 JOFEADAR is a simple application that let's you fast build dashboard for you specific use case. Has the ability to store wanted foøes which may be generated, and allows you to easily clean data from your favorite censor.
 
-### Built With
+- [Presentation](https://docs.google.com/presentation/d/1jKLJZWKXbeiSMcCX9wsFdJUZh47pcVeYCSYsqyjhLrU/edit?usp=sharing)
+
+## Built With
 
 * [DASH](https://dash.plotly.com/)
 * [Plotly](https://plotly.com/dash/)
 * [GCP](https://cloud.google.com/storage)
 * [Bootstrap](https://getbootstrap.com)
+* [Pandas]()
+* [Numpy]()
 
 ## TEAM MEMBERS
 
@@ -15,12 +19,7 @@ JOFEADAR is a simple application that let's you fast build dashboard for you spe
 * [Ferdinand]()
 * [Joans]()
 * [Arvin]()
-libraries
-- pandas
-- numpy
-- plotly
-- dash
-- dash_bootstrap_components
+
 
 ## Articles and tutorials to help you build and understand the application 
 

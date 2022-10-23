@@ -5,7 +5,7 @@ from plotly.subplots import make_subplots
 from dash import html, dcc, callback, Input, Output
 import dash
 
-
+dash.register_page(__name__)
 
 
 
