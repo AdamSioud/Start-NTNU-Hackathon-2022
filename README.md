@@ -13,3 +13,9 @@
 * [Ferdinand]()
 * [Joans]()
 * [Arvin]()
+libraries
+- pandas
+- numpy
+- plotly
+- dash
+- dash_bootstrap_components
