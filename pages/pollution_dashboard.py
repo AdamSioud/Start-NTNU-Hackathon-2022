@@ -118,7 +118,7 @@ firstpage = [
                 [
                     html.H5("Depth", className="text-center"),
                     html.H6(
-                        "How deep is your love", className="text-center font-italic"
+                        "How deep in the water is your Buoy", className="text-center font-italic"
                     ),
                     dcc.Graph(id="depthchart", style={"height": 400}),
                 ],
@@ -139,7 +139,7 @@ firstpage = [
                 [
                     html.H5("Temprature", className="text-center"),
                     html.H6(
-                        "How hot is the water", className="text-center font-italic"
+                        "The temprature of the water", className="text-center font-italic"
                     ),
                     dcc.Graph(id="tempraturechart", style={"height": 400}),
                 ],

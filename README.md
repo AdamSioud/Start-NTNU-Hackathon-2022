@@ -103,3 +103,10 @@ https://www.youtube.com/watch?v=pEbL_TT9cHg&ab_channel=JieJenn
 
 https://www.youtube.com/watch?v=bHudgNDyltI&ab_channel=Cloud%26AIAnalytics
 
+https://www.youtube.com/watch?v=yStmKhLvay4&ab_channel=SoumilShah 
+
+https://soumilshah1995.blogspot.com/2020/11/getting-started-with-gcp-storage-bucket.html
+
+
+ 
+

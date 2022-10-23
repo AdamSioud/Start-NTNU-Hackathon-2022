@@ -37,6 +37,9 @@ CONTENT_STYLE = {
     "padding": "2rem 1rem",
 }
 
+
+
+
 sidebar = html.Div([
 	html.H2("JOFEADAR", className="display-4"),
         html.Hr(),
@@ -48,7 +51,7 @@ sidebar = html.Div([
         [
             dcc.Link(
                 f"{page['name']}", href=page["relative_path"]
-            )
+            , className="row p-3")
             for page in dash.page_registry.values()
         ],  
     ),
