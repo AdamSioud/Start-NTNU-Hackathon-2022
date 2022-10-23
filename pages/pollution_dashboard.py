@@ -58,7 +58,7 @@ firstpage = [
         [
             dbc.Col(
                 [
-                    html.H3("Ocean Access Dashboard", className="text-center mb-3 p-3"),
+                    html.H3("Ocean Access Dashboard - Pollution", className="text-center mb-3 p-3"),
                     html.Hr(),
                 ],
                 width={"size": 12, "offset": 0, "order": 0},

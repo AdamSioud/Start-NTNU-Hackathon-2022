@@ -47,6 +47,14 @@ To do this..
 * [Joans]()
 * [Arvin]()
 
+## To Do's
+
+- Make homepage
+- Build out file storage, connect generatad file to bucket, bucket to storage.py (pages) and then have possibilty to download files direclty from cloud
+- Create a slicker UI for the dashboards
+- File error handling
+- Incoroporate all parts off application in a more robust pipelline
+
 
 ## Articles and tutorials to help you build and understand the application 
 
@@ -108,5 +116,13 @@ https://www.youtube.com/watch?v=yStmKhLvay4&ab_channel=SoumilShah
 https://soumilshah1995.blogspot.com/2020/11/getting-started-with-gcp-storage-bucket.html
 
 
- 
 
+
+- Downloading dynamically generated files from a Dash/Flask app
+
+
+ https://stackoverflow.com/questions/54443531/downloading-dynamically-generated-files-from-a-dash-flask-app 
+
+- Dash download 
+
+https://dash.plotly.com/dash-core-components/download 
