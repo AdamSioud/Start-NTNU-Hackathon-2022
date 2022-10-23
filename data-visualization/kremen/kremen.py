@@ -33,21 +33,21 @@ df.rename(columns={"oil_spill": "pollution"}, inplace=True)
 # oil_spill default verdi 1
 # dypde skal ha range
 
-# fig_all_pressure = px.scatter(
-#     data_frame=df,
-#     x="id",
-#     y="depth",
-#     animation_frame="time",
-#     animation_group="id",
-#     size="pollution",
-#     color="field",
-#     hover_name="id",
-#     facet_col="field",
-#     size_max=100,
-#     category_orders={"Year": list(range(2007, 2019))},
-#     range_y=[0, 40],
-#     range_x=[0, 6],
-# )
+fig_all_pressure = px.scatter(
+    data_frame=df,
+    x="id",
+    y="depth",
+    animation_frame="time",
+    animation_group="id",
+    size="pollution",
+    color="field",
+    hover_name="id",
+    facet_col="field",
+    size_max=100,
+    # category_orders={"Year": list(range(2007, 2019))},
+    range_y=[0, 40],
+    range_x=[0, 6],
+)
 
 # fig_all_pressure.show()
 
@@ -144,7 +144,14 @@ firstpage = [
                         clearable=False,
                     ),
                     # Display text information related to the selected buoy
+                    html.Div(id="generalinfo", className="text-center p-2"),
+                    html.Div(id="depthmean", className="text-center p-2"),
                     html.Div(id="pressuremean", className="text-center p-2"),
+                    html.Div(id="temperaturemean", className="text-center p-2"),
+                    html.Div(id="pollutionmean", className="text-center p-2"),
+                    html.Div(id="depthmax", className="text-center p-2"),
+                    html.Div(id="pressuremax", className="text-center p-2"),
+                    html.Div(id="pollutionmax", className="text-center p-2"),
                 ],
                 width={"size": 4, "offset": 0, "order": 0},
             ),
@@ -153,7 +160,7 @@ firstpage = [
                     html.H5(
                         "Pollution levels on all buoy ids", className="text-center p-1"
                     ),
-                    dcc.Graph(id="allpressurechart", style={"height": 600}),
+                    dcc.Graph(figure=fig_all_pressure, style={"height": 600}),
                 ],
                 width={"size": 8, "offset": 0, "order": 0},
             ),
@@ -213,12 +220,19 @@ app.layout = html.Div(id="page-content", children=firstpage, className="p-3")
 
 @app.callback(
     [
-        Output("allpressurechart", "figure"),
+        # Output("allpressurechart", "figure"),
         Output("depthchart", "figure"),
         Output("pressurechart", "figure"),
         Output("tempraturechart", "figure"),
         Output("pollutionchart", "figure"),
+        Output("generalinfo", "children"),
+        Output("depthmean", "children"),
         Output("pressuremean", "children"),
+        Output("temperaturemean", "children"),
+        Output("pollutionmean", "children"),
+        Output("depthmax", "children"),
+        Output("pressuremax", "children"),
+        Output("pollutionmax", "children"),
     ],
     Input("field-dropdown", "value"),
     Input("id-dropdown", "value"),
@@ -227,37 +241,42 @@ def update_figure(field, robot_id):
 
     df2 = df.loc[(df["id"] == robot_id) & (df["field"] == field)]
 
-    fig_all_pressure = px.scatter(
-        data_frame=df,
-        x="id",
-        y="depth",
-        animation_frame="time",
-        animation_group="id",
-        size="pollution",
-        color="field",
-        hover_name="id",
-        facet_col="field",
-        size_max=100,
-        # category_orders={"Year": list(range(2007, 2019))},
-        range_y=[0, 40],
-        range_x=[0, 6],
-    )
-
     fig_depth = px.line(df2, x="time", y="depth", title="depth")
     fig_pressure = px.line(df2, x="time", y="pressure", title="pressure")
     fig_temprature = px.line(df2, x="time", y="temperature", title="temperature")
     fig_pollution = px.line(df2, x="time", y="pollution", title="pollution")
 
     # text info about current buoy
+    generalinfo = (
+        f"Shows info for the pollution sensor buoy {robot_id} at oil-field {field}"
+    )
+    depthmean = f"The mean of depth data values is: {df2['depth'].mean()}"
     pressuremean = f"The mean of pressure data values is: {df2['pressure'].mean()}"
+    temperaturemean = (
+        f"The mean of temperatures data values is: {df2['temperature'].mean()}"
+    )
+    pollutionmean = f"The mean of pollution data values is: {df2['pollution'].mean()}"
+    depthmax = f"The maximum depth the buoy registered was: {df2['depth'].max()}"
+    pressuremax = (
+        f"The maximum pressure the buoy registered was: {df2['pressure'].max()}"
+    )
+    pollutionmax = (
+        f"The maximum pollution registered by the buoy was: {df2['pollution'].max()}"
+    )
 
     return (
-        fig_all_pressure,
         fig_depth,
         fig_pressure,
         fig_temprature,
         fig_pollution,
+        generalinfo,
+        depthmean,
         pressuremean,
+        temperaturemean,
+        pollutionmean,
+        depthmax,
+        pressuremax,
+        pollutionmax,
     )
 
 
