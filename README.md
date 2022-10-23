@@ -4,6 +4,33 @@ JOFEADAR is a simple application that let's you fast build dashboard for you spe
 
 - [Presentation](https://docs.google.com/presentation/d/1jKLJZWKXbeiSMcCX9wsFdJUZh47pcVeYCSYsqyjhLrU/edit?usp=sharing)
 
+
+## How to run
+
+#### Application
+
+- pip install Requirements
+- python app.py
+
+#### Notebooks
+
+- In data-plots you can use notebook(s) to
+
+#### Dashboards
+
+- Bla bla bla
+
+#### Storage
+
+- To build on file storage for the servce, you need an api key.
+Here is a simple solution but bad one as key is exposed in the codebase.
+
+#### Data processsing
+
+- Pandas is the library used for data processing and here you can take inspiartion
+To do this..
+
+
 ## Built With
 
 * [DASH](https://dash.plotly.com/)
