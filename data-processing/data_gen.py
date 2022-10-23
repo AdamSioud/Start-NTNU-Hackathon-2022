@@ -106,4 +106,4 @@ for idx, field in enumerate(OIL_FIELDS):
 pollution_df = pollution_df.reset_index()
 pollution_df = pollution_df.drop("index", axis=1)
 
-pollution_df.to_csv("data-processing/data/ID123.csv", index=False)
+pollution_df.to_csv("data-processing/data/pollution_data.csv", index=False)
